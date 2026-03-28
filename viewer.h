@@ -3,29 +3,35 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <vector>
-#include <QString>
+#include <QPixmap>
+#include <QStringList>
+#include <QPropertyAnimation>
 
-class UltraViewer : public QMainWindow {
+class ImageViewer : public QMainWindow {
     Q_OBJECT
+
 public:
-    explicit UltraViewer(const std::vector<QString>& files, QWidget *parent = nullptr);
+    explicit ImageViewer(QWidget *parent = nullptr);
+    void setImageList(const QStringList &list, int index);
+
 protected:
-    void keyPressEvent(class QKeyEvent *event) override;
-    void wheelEvent(class QWheelEvent *event) override;
-    void resizeEvent(class QResizeEvent *event) override;
-private:
+    void keyPressEvent(QKeyEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
+
+private slots:
     void nextImage();
     void prevImage();
-    void updateDisplay();
+    void toggleSlideshow();
+    void updateImage();
 
-    std::vector<QString> fileList;
-    int currentIndex;
-    double zoomFactor;
+private:
     QLabel *imageLabel;
-    QLabel *infoOverlay;
-    class QPushButton *btnLeft;
-    class QPushButton *btnRight;
+    QStringList imageList;
+    int currentIndex = 0;
+    double zoomFactor = 1.0;
+    bool isSlideshowActive = false;
+    QTimer *slideshowTimer;
+    void showImage(int index);
 };
 
 #endif
