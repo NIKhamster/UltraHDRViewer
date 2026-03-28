@@ -9,16 +9,26 @@
 ---
 
 ## ✨ Key Features
-* 🌈 **True HDR**: Native 10-bit color support via Qt6.
-* 🎬 **Cinematic Fade**: Smooth transitions (650ms) between images.
-* ⚡ **Ultra Fast**: Written in C++17 for instant response.
-* 🛡️ **Minimalist**: No borders, no clutter—only your HDR content.
+* 🌈 **True HDR**: Native 10-bit color support powered by Qt6.
+* 🎬 **Cinematic Fade**: Immersive 800ms smooth transitions between images.
+* ⚡ **Ultra Fast**: Built with C++17 for instant loading and minimal system impact.
+* 🛡️ **Minimalist Design**: Borderless, distraction-free interface focused entirely on your content.
+* 🔄 **Smart Session**: Integrated `QLocalServer` ensures new files open in the active window.
+
+---
+
+## 🛠 Controls
+| Key | Action |
+| :--- | :--- |
+| `→` / `←` | Next / Previous Image |
+| `Space` | Toggle Slideshow (8-second interval) |
+| `Esc` | Close Application |
 
 ---
 
 ## 🚀 Quick Installation
 
-One script to rule them all. It auto-detects **CachyOS**, **Arch**, or **Fedora**.
+The universal installer automatically detects your distribution (**CachyOS**, **Arch**, or **Fedora**), resolves dependencies, and builds the application.
 
 ```bash
 chmod +x install.sh && ./install.sh

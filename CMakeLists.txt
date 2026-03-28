@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
-project(UltraViewer)
+project(UltraHDRViewer)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets Gui)
+# Добавлен Network
+find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Network)
 
-add_executable(UltraViewer main.cpp)
-target_link_libraries(UltraViewer PRIVATE Qt6::Widgets Qt6::Gui)
+add_executable(UltraHDRViewer main.cpp viewer.h)
+# Линкуем Network
+target_link_libraries(UltraHDRViewer PRIVATE Qt6::Widgets Qt6::Gui Qt6::Network)
 
-install(TARGETS UltraViewer DESTINATION /usr/local/bin)
+install(TARGETS UltraHDRViewer DESTINATION /usr/local/bin)
