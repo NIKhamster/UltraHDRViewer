@@ -1,38 +1,26 @@
 #!/bin/bash
 
-# Define colors for better visibility
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+# Simple English Installer for Ultra HDR Viewer
+echo "--- Checking System Dependencies ---"
 
-echo -e "${GREEN}--- System Identification ---${NC}"
-
-if [ -f /etc/fedora-release ]; then
-    echo "OS: Fedora Detected"
-    sudo dnf install -y gcc-c++ cmake qt6-qtbase-devel qt6-qtimageformats
-elif [ -f /etc/arch-release ] || [ -f /etc/cachyos-release ]; then
-    echo "OS: CachyOS / Arch Detected"
+if [ -f /etc/arch-release ] || [ -f /etc/cachyos-release ]; then
+    echo "System: CachyOS / Arch Linux detected (Primary Support)"
     sudo pacman -S --needed --noconfirm base-devel cmake qt6-base qt6-imageformats
+elif [ -f /etc/fedora-release ]; then
+    echo "System: Fedora detected"
+    sudo dnf install -y gcc-c++ cmake qt6-qtbase-devel qt6-qtimageformats
 else
-    echo -e "${RED}Error: Operating system not supported by this script.${NC}"
-    echo "Please install dependencies (Qt6, CMake, GCC) manually."
+    echo "Unknown OS. Please install Qt6, CMake, and GCC manually."
     exit 1
 fi
 
-echo -e "${GREEN}--- Cleaning and Building Project ---${NC}"
-
-# Remove old build artifacts to ensure a fresh start
+echo "--- Building Ultra HDR Viewer ---"
 rm -rf build
 mkdir build && cd build
-
-# Configure and Compile
 cmake ..
 make -j$(nproc)
 
-echo -e "${GREEN}--- Installation ---${NC}"
-
-# Installs the binary to /usr/local/bin/
+echo "--- Installing ---"
 sudo make install
 
-echo -e "${GREEN}--- Success! Ultra HDR Viewer has been installed ---${NC}"
-echo "You can now run it from your terminal or 'Open With' menu."
+echo "--- Success! Run 'UltraHDRViewer' to start ---"
